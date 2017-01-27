@@ -7,10 +7,34 @@ body {
   padding: 0 40px;
 }
 
+p.intro {
+  color: gray;
+}
+
 h1 {
   font-size: 2.5em;
   font-weight: 300;
   text-align: center;
+}
+
+h2 {
+  font-weight: 300;
+  text-align: center;
+}
+
+#colors {
+  text-align: center;
+}
+
+.color {
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.highlighted {
+  height: 80px;
 }
 
 #target {

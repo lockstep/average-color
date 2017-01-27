@@ -1,3 +1,51 @@
+var colors = [
+  [ 204, 162, 140 ],
+  [ 151, 86, 54 ],
+  [ 223, 170, 139 ],
+  [ 218, 174, 137 ],
+  [ 204, 170, 161 ],
+  [ 203, 137, 113 ],
+  [ 145, 79, 47 ],
+]
+
+// Build the possible color tiles
+$(function() {
+  var $colors = $('#colors');
+  $.each(colors, function(i, c) {
+    var $color = $('<div>');
+    $color.addClass('color');
+    $color.addClass('index-' + i);
+    var rgb = "rgb("+c[0]+","+c[1]+","+c[2]+")";
+    $color.css('background-color', rgb);
+    $colors.append($color);
+  });
+});
+
+function highlightClosestColor(rgbArray) {
+  var measuredLab = rgb2lab(rgbArray);
+  measuredLab = { L: measuredLab[0], A: measuredLab[1], B: measuredLab[2] };
+  var lowestIndex;
+  var lowestDistance;
+  $.each(colors, function(i, c) {
+    var sampleLab = rgb2lab(c);
+    sampleLab = { L: sampleLab[0], A: sampleLab[1], B: sampleLab[2] };
+    // 1976 formula
+    // console.log(DeltaE.getDeltaE76(measuredLab, sampleColor));
+    // 1994 formula
+    // console.log(DeltaE.getDeltaE94(measuredLab, sampleColor));
+    // 2000 formula
+    // console.log(DeltaE.getDeltaE00(measuredLab, sampleColor));
+    var distance = DeltaE.getDeltaE00(measuredLab, sampleLab);
+    console.log(distance);
+    if (!lowestIndex || distance < lowestDistance) {
+      lowestIndex = i;
+      lowestDistance = distance;
+    }
+  });
+  $('.highlighted').removeClass('highlighted')
+  $('.index-' + lowestIndex).addClass('highlighted');
+}
+
 function addImage(file) {
   var element = document.createElement('div');
   element.className = 'row';
@@ -18,6 +66,8 @@ function addImage(file) {
   img.src = URL.createObjectURL(file);
   img.onload = function() {
     var rgb = getAverageColor(img);
+    var rgbArray = [ rgb.r, rgb.g, rgb.b ];
+    highlightClosestColor(rgbArray);
     var hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
     var rgbStr = 'rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ')';
     var hexStr = '#' + rgb.r.toString(16) + rgb.g.toString(16) + rgb.b.toString(16);

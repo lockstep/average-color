@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Get Average Color of Image</title>
+    <title>Get Matching Color</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link href='style.css' rel='stylesheet' type='text/css'>
-    <meta name="google-site-verification" content="ruPP7Z-1iMcsvrbicR-wNJ79VHatSn1JepKnsDgSDlw" />
   </head>
   <body>
-    <h1>Get Average Color of Image</h1>
-    <p>Client-side JavaScript application to get the average color of an image. Drag and drop the files below.
+    <h1>Get Matching Color</h1>
+    <p class="intro">
+      Select a picture and find the closest matching color:
+    </p>
     <div id='target'>Drop Images here</div>
     <div id='images'></div>
-    <footer id='footer'>
-      <iframe src='http://ghbtns.com/github-btn.html?user=matkl&repo=average-color&type=watch&count=true&size=large' allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>
-    </footer>
+    <br />
+    <br />
+    <h2>Possible Matches (e.g. Foundations)</h2>
+    <div id="colors"></div>
+    <script src="converter.js"></script>
+    <script src="deltae.min.js"></script>
     <script src='average-color.js'></script>
   </body>
 </html>
